@@ -27,10 +27,15 @@ class Link {
 
 		if( isset( $handler ) ) {
 			if( method_exists( $handler, $method ) ) {
-				call_user_func(array($handler, $method));
-				if ( !isset( self::$recognized[$path]  ) ) {
-					self::$recognized[$path] = $handler;
-				}	
+				try {
+					call_user_func(array($handler, $method));
+					if ( !isset( self::$recognized[$path]  ) ) {
+						self::$recognized[$path] = $handler;
+					}
+				} catch ( Exception $e ){
+					echo $e;
+					die();
+				} 	
 			}
 		}
 	}
