@@ -2,6 +2,8 @@
 
 class Link {
 	
+	private static $recognized = array();
+
 	public static function all( $routes ) {
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
 		$path = '/';
@@ -23,9 +25,13 @@ class Link {
 			}
 		}
 
-		if( isset( $handler ) ){
-			if( method_exists( $handler, $method ) )
-				call_user_func(array($handler, $method);
+		if( isset( $handler ) ) {
+			if( method_exists( $handler, $method ) ) {
+				call_user_func(array($handler, $method));
+				if ( !isset( self::$recognized[$path]  ) ) {
+					self::$recognized[$path] = $handler;
+				}	
+			}
 		}
 	}
 }
