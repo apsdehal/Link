@@ -122,6 +122,7 @@ Link::all( array (
 	'/' => ['HomeController', 'HomeRoute']
 ));
 
+```
 ##WildCards
 
 Link supports numbers, string and alphanumeric wildcards which can be used as `{i} {s} {a}` respectively and of course it can renders regex also. Example will clear away your doubts
