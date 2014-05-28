@@ -15,7 +15,7 @@ A __minimal__ router for your php webapps and APIs that effortlessly links all y
 For install from composer just add the following line to your project's composer.json file
 ```json
 	"require" : {
-    	"apsdehal/Link" : "dev-master"
+    	"link/link" : "dev-master"
     }
 ```
 
