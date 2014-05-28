@@ -17,14 +17,6 @@ class Link {
 
 		if ( isset($routes[$path] ) ) {
 			$handler = $routes[$path];
-		}
-
-		if ( $handler ) {
-			if ( is_callable($handler) ){
-				$instanceOfHandler = $handler();
-			} else {
-				$instanceOfHandler = new $handler();
-			}
 		} else if ( $routes ) {
 			
 			$regex = array(
@@ -44,9 +36,15 @@ class Link {
 				if( preg_match( '#^/?' . $routePath . '/?$#', $path, $matches ) ){
 					$handler = $routeHandler;
 					$matched = $matches;
-					var_dump($matched);
 					break;
 				}
+			}
+		}
+		if ( $handler ) {
+			if ( is_callable( $handler ) ){
+				$instanceOfHandler = $handler();
+			} else {
+				$instanceOfHandler = new $handler();
 			}
 		}
 
@@ -58,10 +56,12 @@ class Link {
 						self::$recognized[$path] = $instanceOfHandler;
 					}
 				} catch ( Exception $e ){
-					echo $e;
+					echo '<pre>';
+					print_r($e);
 					die();
 				} 	
 			}
 		}
 	}
+
 }
