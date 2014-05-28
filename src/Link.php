@@ -1,8 +1,6 @@
 <?php
 
 class Link {
-	
-	private static $recognized = array();
 
 	public static function all( $routes ) {
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
@@ -52,9 +50,6 @@ class Link {
 			if( method_exists( $instanceOfHandler, $method ) ) {
 				try {
 					call_user_func_array( array( $instanceOfHandler, $method ), $matched );
-					if ( !isset( self::$recognized[$path]  ) ) {
-						self::$recognized[$path] = $instanceOfHandler;
-					}
 				} catch ( Exception $e ){
 					echo '<pre>';
 					print_r($e);
@@ -63,5 +58,4 @@ class Link {
 			}
 		}
 	}
-
 }
