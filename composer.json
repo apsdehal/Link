@@ -1,0 +1,28 @@
+{
+    "name": "link/link",
+    "type": "library",
+    "description": "A PHP router that helps you create webapps and APIs effortlessly",
+    "keywords": [
+        "framework",
+        "php",
+        "router"
+    ],
+    "homepage": "http://github.com/apsdehal/Link"   ,
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amanpreet Singh",
+            "email": "apsdehal@gmail.com",
+            "homepage": "http://spookout.blogspot.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": [
+            "src/Link.php"
+        ]
+    }
+}
