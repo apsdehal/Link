@@ -102,7 +102,7 @@ RESTful routing is a breeze for Link.
 class HomeController{
 	
     function get(){
-    	echo 'You have got to home :grinning:';
+    	echo 'You have got to home :)';
     }
     
     function post(){
@@ -114,10 +114,53 @@ class HomeController{
     }
     
     function delete(){
-    	echo 'You have deleted the home :sad:';
+    	echo 'You have deleted the home :(';
     }
 }
 
 Link::all( array (
 	'/' => ['HomeController', 'HomeRoute']
 ));
+
+##WildCards
+
+Link supports numbers, string and alphanumeric wildcards which can be used as `{i} {s} {a}` respectively and of course it can renders regex also. Example will clear away your doubts
+
+```php
+$routes = array(
+	'/' => 'IndexController',
+    '/{i}' => 'IndexController' 
+    //Parameter in place of {i} will be passed to IndexController
+	'/posts/{a}/{i}/{s}' => 'PostsController'
+);
+
+Link::all($routes);
+```
+
+##Passing Parameters to Named Routes
+
+You can pass parameters to named routes if the have wildcards in the route path, this will thus generate dynamic links through a single named route.
+
+```php
+
+<?php
+
+function nameMe( $i, $s ){
+	echo 'I am named and I have been passed ' . $i . $s ;
+}
+
+Link::all( array(
+	'/named/{i}/{s}' => ['nameMe', 'Its my name']
+));
+
+```
+
+Now generate a link through Link
+
+```php
+
+echo Link::route( 'Its my name', array(1, 'Me') );
+
+```
+
+This in turn will generate `YOUR_DOMAIN/named/1/Me`.
