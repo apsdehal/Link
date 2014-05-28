@@ -6,8 +6,6 @@ class Link {
 
 	public static function all( $routes ) {
 		self::$routes = $routes;
-		echo '<pre>';
-		die();
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
 		$path = '/';
 		$handler = null;
@@ -20,7 +18,7 @@ class Link {
 
 		if ( isset($routes[$path] ) ) {
 			if( is_array( $routes[$path] ) )
-				$handler = $routes[$path][0]
+				$handler = $routes[$path][0];
 			else
 				$handler = $routes[$path];
 		} else if ( $routes ) {
@@ -40,10 +38,10 @@ class Link {
 			foreach ( $routes as $routePath => $routeDesc ){
 				$routePath = preg_replace( $regex, $replacements, $routePath );
 				if( preg_match( '#^/?' . $routePath . '/?$#', $path, $matches ) ){
-					if( is_array( $routeDesc) ){
-						$handler = $routeDesc[0]
-					else 
+					if( is_array( $routeDesc ) )
 						$handler = $routeDesc[0];
+					else 
+						$handler = $routeDesc;
 					$matched = $matches;
 					break;
 				}
@@ -70,9 +68,19 @@ class Link {
 		}
 	}
 
-	public static route( $name, $params = array() ){
+	public static function route( $name, $params = array() ){
+		$href = null;
 		foreach ( self::$routes as $routePath => $routeDesc ) {
-			
+			if( is_array( $routeDesc ) ){
+				if( $name == $routeDesc[1] ){
+					$href = $routePath;
+					for( $i = 0; $i < count($params); $i++){
+						$href = preg_replace('#{(.*?)}#', $params[$i], $href, 1);
+					}
+				}
+
+			}
 		}
+		return $href;
 	}
 }
