@@ -121,7 +121,6 @@ class HomeController{
 Link::all( array (
 	'/' => ['HomeController', 'HomeRoute']
 ));
-
 ```
 ##WildCards
 
@@ -153,7 +152,6 @@ function nameMe( $i, $s ){
 Link::all( array(
 	'/named/{i}/{s}' => ['nameMe', 'Its my name']
 ));
-
 ```
 
 Now generate a link through Link
@@ -161,7 +159,6 @@ Now generate a link through Link
 ```php
 
 echo Link::route( 'Its my name', array(1, 'Me') );
-
 ```
 
 This in turn will generate `YOUR_DOMAIN/named/1/Me`.
