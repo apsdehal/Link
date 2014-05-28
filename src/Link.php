@@ -2,7 +2,12 @@
 
 class Link {
 
+	private static $routes = array();
+
 	public static function all( $routes ) {
+		self::$routes = $routes;
+		echo '<pre>';
+		die();
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
 		$path = '/';
 		$handler = null;
@@ -14,7 +19,10 @@ class Link {
 		}
 
 		if ( isset($routes[$path] ) ) {
-			$handler = $routes[$path];
+			if( is_array( $routes[$path] ) )
+				$handler = $routes[$path][0]
+			else
+				$handler = $routes[$path];
 		} else if ( $routes ) {
 			
 			$regex = array(
@@ -29,10 +37,13 @@ class Link {
 				'([\w-]+)'
 				);
 
-			foreach ( $routes as $routePath => $routeHandler ){
+			foreach ( $routes as $routePath => $routeDesc ){
 				$routePath = preg_replace( $regex, $replacements, $routePath );
 				if( preg_match( '#^/?' . $routePath . '/?$#', $path, $matches ) ){
-					$handler = $routeHandler;
+					if( is_array( $routeDesc) ){
+						$handler = $routeDesc[0]
+					else 
+						$handler = $routeDesc[0];
 					$matched = $matches;
 					break;
 				}
@@ -56,6 +67,12 @@ class Link {
 					die();
 				} 	
 			}
+		}
+	}
+
+	public static route( $name, $params = array() ){
+		foreach ( self::$routes as $routePath => $routeDesc ) {
+			
 		}
 	}
 }
