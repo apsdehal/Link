@@ -67,6 +67,7 @@ class Link {
 		}
 
 		if( isset( $instanceOfHandler ) ) {
+			unset($matched[0]);
 			if( method_exists( $instanceOfHandler, $method ) ) {
 				try {
 					call_user_func_array( array( $instanceOfHandler, $method ), $matched );
@@ -99,6 +100,6 @@ class Link {
 
 			}
 		}
-		return $_SERVER['HTTP_HOST'] . $href;
+		return $href;
 	}
 }
