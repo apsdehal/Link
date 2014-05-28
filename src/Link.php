@@ -81,6 +81,6 @@ class Link {
 
 			}
 		}
-		return $href;
+		return $_SERVER['HTTP_HOST'] . $href;
 	}
 }
