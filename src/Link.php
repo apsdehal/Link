@@ -1,9 +1,20 @@
 <?php
 
+/**
+ * @class Main class of the Link router that helps you create and deploy routes
+ */	
 class Link {
 
+	/**
+	 * @var A collection of the routes originally passed into all function. Used by static function route
+	 */	
 	private static $routes = array();
 
+	/**
+	 * Static function of the class Link that deploys the route according to the passed handler and path
+	 * 
+	 * @param $routes array An array of conbination of the path and its handler, that are final deployed for a particular url
+	 */	
 	public static function all( $routes ) {
 		self::$routes = $routes;
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
@@ -68,6 +79,13 @@ class Link {
 		}
 	}
 
+	/**
+	 * Static function that helps you generate links effortlesly and pass parameters to them, thus enabling to generate dynamic links
+	 *
+	 * @param $name string name of the route for which the link has to be generated
+	 * @param $params array An array of parameters that are replaced in the route if it contains wildcards
+	 *						For e.g. if route is /name/{i}/{a} and parameters passed are 1, aps then link generated will be /name/1/aps  
+	 */	
 	public static function route( $name, $params = array() ){
 		$href = null;
 		foreach ( self::$routes as $routePath => $routeDesc ) {
