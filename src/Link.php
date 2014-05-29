@@ -63,10 +63,10 @@ class Link {
 			if ( is_callable( $handler ) ){
 				call_user_func_array( $handler, $matched ) ;
 			} else {
-				try{
+				if( class_exists( $handler ) ) {
 					$instanceOfHandler = new $handler();
-				} catch ( Exception $e ){
-					echo $e;
+				} else {
+					echo 'Class or function ' . $handler . ' not found';
 					die();
 				}
 			}
