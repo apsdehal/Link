@@ -1,0 +1,11 @@
+{
+  "require": {
+    "link/link":"dev-master"
+  },
+  "autoload": {
+    "classmap": [
+      "functions.php",
+      "classes/static.php",
+    ]
+  }
+}
