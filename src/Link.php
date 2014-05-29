@@ -59,21 +59,25 @@ class Link {
 			}
 		}
 		if ( $handler ) {
+			unset( $matched[0] );
 			if ( is_callable( $handler ) ){
-				$instanceOfHandler = $handler();
+				call_user_func_array( $handler, $matched ) ;
 			} else {
-				$instanceOfHandler = new $handler();
+				try{
+					$instanceOfHandler = new $handler();
+				} catch ( Exception $e ){
+					echo $e;
+					die();
+				}
 			}
 		}
 
 		if( isset( $instanceOfHandler ) ) {
-			unset($matched[0]);
 			if( method_exists( $instanceOfHandler, $method ) ) {
 				try {
 					call_user_func_array( array( $instanceOfHandler, $method ), $matched );
 				} catch ( Exception $e ){
-					echo '<pre>';
-					print_r($e);
+					echo $e;
 					die();
 				} 	
 			}
