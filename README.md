@@ -162,3 +162,28 @@ echo Link::route( 'Its my name', array(1, 'Me') );
 ```
 
 This in turn will generate `YOUR_DOMAIN/named/1/Me`.
+
+# Server Configuration
+
+## Apache
+
+You should add the following code snippet in your Apache HTTP server VHost configuration or **.htaccess** file.
+
+```apacheconf
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond $1 !^(index\.php)
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+```
+
+Alternatively, in a version of Apache greater than 2.2.15, then you can use this:
+```apacheconf
+FallbackResource /index.php
+```
+
+#Todo
+
+- Middlewares
