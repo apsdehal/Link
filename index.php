@@ -1,6 +1,6 @@
 <?php
 require('src/Link.php');
-require('controllers/HomeController.php'); 
+require('controllers/HomeController.php');
 /* 
   You can autoload these classes by adding the folder to your 
   autoload section in composer.json of your project
