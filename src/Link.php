@@ -77,7 +77,8 @@ class Link {
 				try {
 					call_user_func_array( array( $instanceOfHandler, $method ), $matched );
 				} catch ( Exception $e ){
-					echo $e;
+					error_log($e);
+					print_r($e);
 					die();
 				} 	
 			}
