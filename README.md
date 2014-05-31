@@ -124,7 +124,7 @@ Link::all( array (
 ```
 ##WildCards
 
-Link supports numbers, string and alphanumeric wildcards which can be used as `{i} {s} {a}` respectively and of course it can renders regex also. Example will clear away your doubts
+Link supports numbers, string and alphanumeric wildcards which can be used as `{i} {s} {a}` respectively and of course it can render regex also. Example will clear away your doubts
 
 ```php
 $routes = array(
@@ -163,6 +163,10 @@ echo Link::route( 'Its my name', array(1, 'Me') );
 
 This in turn will generate `YOUR_DOMAIN/named/1/Me`.
 
+## 404 Errors
+
+You should probably add a 404 handler to your routes array, rest Link will take care of handling routes that are not found. In case, Link doesn't find a 404 route defined, it will just send a 404 header.
+
 # Server Configuration
 
 ## Apache
@@ -187,3 +191,7 @@ FallbackResource /index.php
 #Todo
 
 - Middlewares
+
+#License
+
+Link is available under MIT license, so feel free to contribute and modify it as you like. Free software, Yeah!
