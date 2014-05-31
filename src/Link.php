@@ -66,10 +66,12 @@ class Link {
 				if( class_exists( $handler ) ) {
 					$instanceOfHandler = new $handler();
 				} else {
-					echo 'Class or function ' . $handler . ' not found';
+					print_r('Class or function ' . $handler . ' not found');
 					die();
 				}
 			}
+		} else {
+			self::handle404();
 		}
 
 		if( isset( $instanceOfHandler ) ) {
@@ -105,5 +107,16 @@ class Link {
 			}
 		}
 		return $href;
+	}
+
+	/**
+	 * Static function to handle cases when route is not found, call handler of 404 if defined else
+	 * sends a 404 header
+	 */	
+	public static function handle404() {
+		if( isset ( self::$routes['404'] ) )
+			call_user_func( self::$routes['404'] );
+		else
+			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); 
 	}
 }
