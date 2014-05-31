@@ -76,9 +76,9 @@ class Link {
 			if( method_exists( $instanceOfHandler, $method ) ) {
 				try {
 					call_user_func_array( array( $instanceOfHandler, $method ), $matched );
-				} catch ( Exception $e ){
-					error_log($e);
-					print_r($e);
+				} catch ( Exception $exception ){
+					$string = str_replace("\n", ' ', var_export($exception, TRUE));
+					error_log($string); //Log to error file only if display errors has been declared
 					die();
 				} 	
 			}
