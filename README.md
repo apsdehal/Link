@@ -129,7 +129,7 @@ Link supports numbers, string and alphanumeric wildcards which can be used as `{
 ```php
 $routes = array(
 	'/' => 'IndexController',
-    '/{i}' => 'IndexController' 
+    '/{i}' => 'IndexController',
     //Parameter in place of {i} will be passed to IndexController
 	'/posts/{a}/{i}/{s}' => 'PostsController'
 );
