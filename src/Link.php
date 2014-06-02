@@ -49,8 +49,11 @@ class Link {
 			foreach ( $routes as $routePath => $routeDesc ){
 				$routePath = preg_replace( $regex, $replacements, $routePath );
 				if( preg_match( '#^/?' . $routePath . '/?$#', $path, $matches ) ){
-					if( is_array( $routeDesc ) )
+					if( is_array( $routeDesc ) ) {
 						$handler = $routeDesc[0];
+						if( isset( $routeDesc[2] ))
+							$middleware = $routeDesc[2];
+					}
 					else 
 						$handler = $routeDesc;
 					$matched = $matches;
