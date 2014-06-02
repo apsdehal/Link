@@ -61,32 +61,16 @@ class Link {
 				}
 			}
 		}
-		if ( $handler ) {
-			unset( $matched[0] );
-			if ( is_callable( $handler ) ){
-				call_user_func_array( $handler, $matched ) ;
-			} else {
-				if( class_exists( $handler ) ) {
-					$instanceOfHandler = new $handler();
-				} else {
-					print_r('Class or function ' . $handler . ' not found');
-					die();
-				}
-			}
-		} else {
-			self::handle404();
-		}
+		unset( $matched[0] );
 
-		if( isset( $instanceOfHandler ) ) {
-			if( method_exists( $instanceOfHandler, $method ) ) {
-				try {
-					call_user_func_array( array( $instanceOfHandler, $method ), $matched );
-				} catch ( Exception $exception ){
-					$string = str_replace("\n", ' ', var_export($exception, TRUE));
-					error_log($string); //Log to error file only if display errors has been declared
-					die();
-				} 	
-			}
+		if( isset($middleware) ){
+			$newMatched = self::callFunction( $middleware, $matched );
+			if( $newMatched )
+				self::callFunction( $handler, $newMatched );
+			else
+				self::callFunction( $handler, $matched );
+		} else {
+			self::callFunction( $handler, $matched );
 		}
 	}
 
@@ -121,5 +105,37 @@ class Link {
 			call_user_func( self::$routes['404'] );
 		else
 			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); 
+	}
+
+	public static function callFunction( $handler , $matched ){
+		if ( $handler ) {	
+			if ( is_callable( $handler ) ){
+				$newParams = call_user_func_array( $handler, $matched ) ;
+			} else {
+				if( class_exists( $handler ) ) {
+					$instanceOfHandler = new $handler();
+				} else {
+					print_r('Class or function ' . $handler . ' not found');
+					die();
+				}
+			}
+		} else {
+			self::handle404();
+		}
+
+		if( isset( $instanceOfHandler ) ) {
+			if( method_exists( $instanceOfHandler, $method ) ) {
+				try {
+					$newParams = call_user_func_array( array( $instanceOfHandler, $method ), $matched );
+				} catch ( Exception $exception ){
+					$string = str_replace("\n", ' ', var_export($exception, TRUE));
+					error_log($string); //Log to error file only if display errors has been declared
+					die();
+				} 	
+			}
+		}
+		if( $newParams ){
+			return $newParams;		
+		}
 	}
 }
