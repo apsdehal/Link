@@ -65,7 +65,8 @@ class Link {
 
 		if( isset($middleware) ){
 			$newMatched = self::callFunction( $middleware, $matched );
-			if( $newMatched )
+			/* If new wildcard param are there pass them to main handler */
+			if( $newMatched ) 
 				self::callFunction( $handler, $newMatched );
 			else
 				self::callFunction( $handler, $matched );
@@ -101,19 +102,32 @@ class Link {
 	 * sends a 404 header
 	 */	
 	public static function handle404() {
+		/* Call '404' route if it exists */
 		if( isset ( self::$routes['404'] ) )
 			call_user_func( self::$routes['404'] );
 		else
 			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); 
 	}
 
+	/**
+	 * Static function to handle both middlewares' call and main handler's call.
+	 *
+	 * @param array|string $handler Handler that will handle the routes call or middleware
+	 * @param array $matched The parameters that we get from the route wildcard
+	 * @return array $newParams The parameters return in the case of middleware if you intend to
+	 * 							the wildcards that were originally passed, this newParams will 
+	 *							be next passed to main handler   
+	 */	
 	public static function callFunction( $handler , $matched ){
 		if ( $handler ) {	
 			if ( is_callable( $handler ) ){
 				$newParams = call_user_func_array( $handler, $matched ) ;
 			} else {
+		
+				/* Check if class exists in the case user is using RESTful pattern  */
+		
 				if( class_exists( $handler ) ) {
-					$instanceOfHandler = new $handler();
+					$instanceOfHandler = new $handler(); // Won't work in case of middleware since we aren't using RESTful in that
 				} else {
 					print_r('Class or function ' . $handler . ' not found');
 					die();
