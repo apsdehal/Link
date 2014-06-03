@@ -26,6 +26,10 @@ class Link {
 	 * @param array $routes An array of combination of the path and its handler, that are final deployed for a particular url
 	 */	
 	public static function all( $routes ) {
+
+		/* Call all functions that are to be executed before routing */
+		self::callSupplimentaries( 'before' );
+
 		self::$routes = $routes;
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
 		$path = '/';
@@ -83,6 +87,9 @@ class Link {
 		} else {
 			self::callFunction( $handler, $matched );
 		}
+
+		/* Call all the function that are to be executed after routing */
+		self::callSupplimentaries( 'after' );
 	}
 
 	/**
@@ -160,6 +167,35 @@ class Link {
 		}
 		if( $newParams ){
 			return $newParams;		
+		}
+	}
+
+	public static function before( $funcName, $params ){
+		if( !$params )
+			$params = null;
+		array_push( self::$beforeFuncs, [ $funcName, $params ]);
+	}
+
+	public static function after( $funcName, $params ){
+		if( !$params )
+			$params = null;		
+		array_push( self::$afterFuncs, [ $funcName, $params ]);
+	}
+
+	public static function callSupplimentaries( $type ){
+		if( $type == 'before' ){
+			foreach( self::$beforeFuncs as $func ){
+				if( $func[1] )
+					call_user_func_array( $func[0] , $func[1] );
+				else
+					call_user_func( $func[0] );
+			}
+		} else if( $type == 'after' ){
+			foreach( self::$afterFuncs as $func )
+				if( $func[1] )
+					call_user_func_array( $func[0] , $func[1] );
+				else
+					call_user_func( $func[0] );
 		}
 	}
 }
