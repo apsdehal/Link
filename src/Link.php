@@ -170,18 +170,37 @@ class Link {
 		}
 	}
 
+	/**
+	 * Static function to add functions that are to be excuted before each routing, must be called before Link::all
+	 *
+	 * @param string $funcName Name of the funtion to be called upon before
+	 * @param array $params Array of parameters that are to be passed to before function, can be null but if not
+	 *						it must be an array 
+	 */	
 	public static function before( $funcName, $params ){
 		if( !$params )
 			$params = null;
 		array_push( self::$beforeFuncs, [ $funcName, $params ]);
 	}
 
+	/**
+	 * Static function to add functions that are to be excuted after each routing, must be called before Link::all
+	 *
+	 * @param string $funcName Name of the funtion to be called upon after
+	 * @param array $params Array of parameters that are to be passed to after function, can be null but if not
+	 *						it must be an array 
+	 */	
 	public static function after( $funcName, $params ){
 		if( !$params )
 			$params = null;		
 		array_push( self::$afterFuncs, [ $funcName, $params ]);
 	}
 
+	/**
+	 * Static function to call supplimentary before and after functions
+	 *
+	 * @param string $type Type of function to be called 'before' or 'after'
+	 */	
 	public static function callSupplimentaries( $type ){
 		if( $type == 'before' ){
 			foreach( self::$beforeFuncs as $func ){
