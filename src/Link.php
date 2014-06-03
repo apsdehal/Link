@@ -11,6 +11,16 @@ class Link {
 	private static $routes = array();
 
 	/**
+	 * @var array A collection of functions that are executed before a route completion ( valid for all routes ), aka universal before functions
+	 */	
+	private static $beforeFuncs = array();
+
+	/**
+	 * @var array A collection of function that are executed after a route completion ( valid for all routes ), aka universal after functions
+	 */	
+	private static $afterFuncs = array();
+
+	/**
 	 * Static function of the class Link that deploys the route according to the passed handler and path
 	 * 
 	 * @param array $routes An array of combination of the path and its handler, that are final deployed for a particular url
