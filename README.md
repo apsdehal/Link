@@ -6,6 +6,7 @@ A __minimal__ router for your php webapps and APIs that effortlessly links all y
 - Wildcards for your limitless creativity
 - Named routes to help you create links easily
 - Self documented, speaks its own legacy
+- Before and after routes function support
 - Tested with PHP >5.3
 
 #Installation
@@ -136,6 +137,65 @@ $routes = array(
 
 Link::all($routes);
 ```
+##Supplimentary Handlers
+
+###Universal Extra Handlers
+
+Through Link, universal before and after handlers can be added, such that these are executed always before any route is routed. This can be done as follows:
+
+```php
+<?php
+function universalBeforeHandler( $id ) {
+    echo 'Hello I occured before with ' . $id . '\n';
+}
+
+function universalAfterHandler( $id ) {
+    if( $id )
+        echo 'Hello I occured after with ' . $id;
+    else
+        echo 'I simply occured after';
+}
+
+function main(){
+    echo 'I simply occured\n'
+}
+
+Link::before( 'universalBeforeHandler', ['12'] ); //If you want to pass parameters to them, pass them as arrays
+Link::before( 'universalBeforeHandler'); //else don't even pass them
+
+Link::all( array(
+    '/' => 'main'
+    ))
+```
+
+Now go to '/' in your browser to find:
+
+Hello I occured before with 12
+
+I simply occured
+
+I simply occured after.
+
+###Single Route
+
+You can add a before (middle) handler to a specific route, just pass the before handler to routes array as third parameters. The wildcards extracted from route will be passed to to before handler and if it return some array, this array will be passed further to main handler but if not the original extracted wildcards would be passed away. Make sure you return an array from before handler.
+
+```php
+<?php 
+function beforeHandler( $name ) {
+    return [ $name . ' Link' ];
+}
+
+function mainHandler( $name ){
+    echo $name;
+}
+
+Link::all(array(
+    '/{s}' => 'mainHandler', 'Main', 'beforHandler'
+    ));
+``` 
+
+Go to '/aps' in browser, you will get *aps Link*.
 
 ##Passing Parameters to Named Routes
 
@@ -187,10 +247,6 @@ Alternatively, in a version of Apache greater than 2.2.15, then you can use this
 ```apacheconf
 FallbackResource /index.php
 ```
-
-#Todo
-
-- Middlewares
 
 #License
 
