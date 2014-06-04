@@ -177,9 +177,7 @@ class Link {
 	 * @param array $params Array of parameters that are to be passed to before function, can be null but if not
 	 *						it must be an array 
 	 */	
-	public static function before( $funcName, $params ){
-		if( !$params )
-			$params = null;
+	public static function before( $funcName, $params = null ){
 		array_push( self::$beforeFuncs, [ $funcName, $params ]);
 	}
 
@@ -190,9 +188,7 @@ class Link {
 	 * @param array $params Array of parameters that are to be passed to after function, can be null but if not
 	 *						it must be an array 
 	 */	
-	public static function after( $funcName, $params ){
-		if( !$params )
-			$params = null;		
+	public static function after( $funcName, $params = null ){
 		array_push( self::$afterFuncs, [ $funcName, $params ]);
 	}
 
