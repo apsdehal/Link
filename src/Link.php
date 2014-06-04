@@ -78,14 +78,14 @@ class Link {
 		unset( $matched[0] );
 
 		if( isset($middleware) ){
-			$newMatched = self::callFunction( $middleware, $matched );
+			$newMatched = self::callFunction( $middleware, $matched, $method );
 			/* If new wildcard param are there pass them to main handler */
 			if( $newMatched ) 
-				self::callFunction( $handler, $newMatched );
+				self::callFunction( $handler, $newMatched, $method );
 			else
-				self::callFunction( $handler, $matched );
+				self::callFunction( $handler, $matched, $method );
 		} else {
-			self::callFunction( $handler, $matched );
+			self::callFunction( $handler, $matched, $method );
 		}
 
 		/* Call all the function that are to be executed after routing */
@@ -135,7 +135,7 @@ class Link {
 	 * 							the wildcards that were originally passed, this newParams will 
 	 *							be next passed to main handler   
 	 */	
-	public static function callFunction( $handler , $matched ){
+	public static function callFunction( $handler , $matched, $method ){
 		if ( $handler ) {	
 			if ( is_callable( $handler ) ){
 				$newParams = call_user_func_array( $handler, $matched ) ;
