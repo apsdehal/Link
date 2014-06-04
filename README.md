@@ -100,7 +100,8 @@ RESTful routing is a breeze for Link.
 
 <?php
 
-class HomeController{
+class HomeController
+{
 	
     function get(){
     	echo 'You have got to home :)';
@@ -247,6 +248,27 @@ Alternatively, in a version of Apache greater than 2.2.15, then you can use this
 ```apacheconf
 FallbackResource /index.php
 ```
+
+#Notes
+
+If you are planning to use non-Restful method and non-static classes, then use them as follows:
+
+```php
+class HelloHandler 
+{
+    public function home(){
+        echo 'Hello home';
+    }
+}
+
+$helloObject = new HelloHandler();
+
+Link::all( array(
+    '/' => array( $helloObejct, 'home' )
+    ))
+```
+
+So you need to pass such functions as `array( $object, 'functionName' )`
 
 #License
 
