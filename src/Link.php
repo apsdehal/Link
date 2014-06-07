@@ -165,7 +165,7 @@ class Link {
 				} 	
 			}
 		}
-		if( $newParams ){
+		if( isset( $newParams ) && $newParams ){
 			return $newParams;		
 		}
 	}
