@@ -270,6 +270,13 @@ Link::all( array(
 
 So you need to pass such functions as `array( $object, 'functionName' )`
 
+#Contributions
+
+Thanks to all people below for contributing to Link.
+
+- @jedmiry
+- @pborelli
+
 #License
 
 Link is available under MIT license, so feel free to contribute and modify it as you like. Free software, Yeah!
