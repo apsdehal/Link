@@ -28,7 +28,12 @@ class Link {
 	public static function all( $routes ) {
 
 		/* Call all functions that are to be executed before routing */
-		self::callSupplimentaries( 'before' );
+		foreach( self::$beforeFuncs as $beforeFunc ){
+			if( $beforeFunc[1] )
+				call_user_func_array( $beforeFunc[0] , $beforeFunc[1] );
+			else
+				call_user_func( $beforeFunc[0] );
+		}
 
 		self::$routes = $routes;
 		$method = strtolower($_SERVER['REQUEST_METHOD']);
@@ -89,7 +94,11 @@ class Link {
 		}
 
 		/* Call all the function that are to be executed after routing */
-		self::callSupplimentaries( 'after' );
+		foreach( self::$afterFuncs as $afterFunc )
+			if( $afterFunc[1] )
+				call_user_func_array( $afterFunc[0] , $afterFunc[1] );
+			else
+				call_user_func( $afterFunc[0] );
 	}
 
 	/**
@@ -190,27 +199,5 @@ class Link {
 	 */	
 	public static function after( $funcName, $params = null ){
 		array_push( self::$afterFuncs, [ $funcName, $params ]);
-	}
-
-	/**
-	 * Static function to call supplimentary before and after functions
-	 *
-	 * @param string $type Type of function to be called 'before' or 'after'
-	 */	
-	public static function callSupplimentaries( $type ){
-		if( $type == 'before' ){
-			foreach( self::$beforeFuncs as $func ){
-				if( $func[1] )
-					call_user_func_array( $func[0] , $func[1] );
-				else
-					call_user_func( $func[0] );
-			}
-		} else if( $type == 'after' ){
-			foreach( self::$afterFuncs as $func )
-				if( $func[1] )
-					call_user_func_array( $func[0] , $func[1] );
-				else
-					call_user_func( $func[0] );
-		}
 	}
 }
