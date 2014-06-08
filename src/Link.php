@@ -43,7 +43,7 @@ class Link {
 		if ( !empty ( $_SERVER['PATH_INFO'] ) ) {
 			$path = $_SERVER['PATH_INFO'];
 		} else if ( !empty ( $_SERVER['REQUEST_URI'] ) ) {
-            $path = (strpos($_SERVER['REQUEST_URI'], '?') > 0) ? strstr($_SERVER['REQUEST_URI'], '?', true) : $_SERVER['REQUEST_URI'];
+            $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 		}
 
 		if ( isset($routes[$path] ) ) {
