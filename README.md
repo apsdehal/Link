@@ -9,6 +9,11 @@ A __minimal__ router for your php webapps and APIs that effortlessly links all y
 - Before and after routes function support
 - Tested with PHP >5.3
 
+##HHVM Version
+
+HHVM version of Link can be found at https://github.com/bmbsqd/Link-Hack . Thanks to [Andy Hawkins](https://github.com/a904guy) for creating it.
+
+
 #Installation
 
 ## Composer
