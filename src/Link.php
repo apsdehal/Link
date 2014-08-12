@@ -31,10 +31,11 @@ class Link
 
 		/* Call all functions that are to be executed before routing */
 		foreach( self::$beforeFuncs as $beforeFunc ) {
-			if( $beforeFunc[1] )
+			if( $beforeFunc[1] ) {
 				call_user_func_array( $beforeFunc[0] , $beforeFunc[1] );
-			else
+			} else {
 				call_user_func( $beforeFunc[0] );
+			}
 		}
 
 		self::$routes = $routes;
@@ -49,10 +50,11 @@ class Link
 		}
 
 		if ( isset($routes[$path] ) ) {
-			if( is_array( $routes[$path] ) )
+			if( is_array( $routes[$path] ) ) {
 				$handler = $routes[$path][0];
-			else
+			} else {
 				$handler = $routes[$path];
+			}
 		} else if ( $routes ) {
 			
 			$regex = array(
@@ -72,8 +74,9 @@ class Link
 				if( preg_match( '#^/?' . $routePath . '/?$#', $path, $matches ) ){
 					if( is_array( $routeDesc ) ) {
 						$handler = $routeDesc[0];
-						if( isset( $routeDesc[2] ))
+						if( isset( $routeDesc[2] )) {
 							$middleware = $routeDesc[2];
+						}
 					}
 					else 
 						$handler = $routeDesc;
@@ -87,20 +90,22 @@ class Link
 		if( isset($middleware) ){
 			$newMatched = self::callFunction( $middleware, $matched, $method );
 			/* If new wildcard param are there pass them to main handler */
-			if( $newMatched ) 
+			if( $newMatched ) { 
 				self::callFunction( $handler, $newMatched, $method );
-			else
+			} else {
 				self::callFunction( $handler, $matched, $method );
+			}
 		} else {
 			self::callFunction( $handler, $matched, $method );
 		}
 
 		/* Call all the function that are to be executed after routing */
 		foreach( self::$afterFuncs as $afterFunc )
-			if( $afterFunc[1] )
+			if( $afterFunc[1] ) {
 				call_user_func_array( $afterFunc[0] , $afterFunc[1] );
-			else
+			} else {
 				call_user_func( $afterFunc[0] );
+			}
 	}
 
 	/**
@@ -133,10 +138,11 @@ class Link
 	public static function handle404() 
 	{
 		/* Call '404' route if it exists */
-		if( isset ( self::$routes['404'] ) )
+		if( isset ( self::$routes['404'] ) ) {
 			call_user_func( self::$routes['404'] );
-		else
+		} else {
 			header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found"); 
+		}
 	}
 
 	/**
@@ -181,7 +187,7 @@ class Link
 				} 	
 			}
 		}
-		if( isset( $newParams ) && $newParams ){
+		if( isset( $newParams ) && $newParams ) {
 			return $newParams;		
 		}
 	}
