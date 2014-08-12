@@ -156,6 +156,7 @@ class Link {
 					$instanceOfHandler = new $handler(); // Won't work in case of middleware since we aren't using RESTful in that
 				} else {
 					print_r('Class or function ' . $handler . ' not found');
+					header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 					die();
 				}
 			}
@@ -170,6 +171,7 @@ class Link {
 				} catch ( Exception $exception ){
 					$string = str_replace("\n", ' ', var_export($exception, TRUE));
 					error_log($string); //Log to error file only if display errors has been declared
+					header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);
 					die();
 				} 	
 			}
