@@ -1,0 +1,350 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Link by apsdehal</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Link</h1>
+        <p>A PHP router that helps you create webapps and APIs effortlessly</p>
+
+        <p class="view"><a href="https://github.com/apsdehal/Link">View the Project on GitHub <small>apsdehal/Link</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/apsdehal/Link/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/apsdehal/Link/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/apsdehal/Link">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="link" class="anchor" href="#link"><span class="octicon octicon-link"></span></a>Link</h1>
+
+<p>A <strong>minimal</strong> router for your php webapps and APIs that effortlessly links all your project. Its fast and to the point.</p>
+
+<h1>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h1>
+
+<ul>
+<li>RESTful routing</li>
+<li>Wildcards for your limitless creativity</li>
+<li>Named routes to help you create links easily</li>
+<li>Self documented, speaks its own legacy</li>
+<li>Before and after routes function support</li>
+<li>Tested with PHP &gt;5.3</li>
+</ul><h2>
+<a name="hhvm-version" class="anchor" href="#hhvm-version"><span class="octicon octicon-link"></span></a>HHVM Version</h2>
+
+<p>HHVM version of Link can be found at <a href="https://github.com/bmbsqd/Link-Hack">https://github.com/bmbsqd/Link-Hack</a> . Thanks to <a href="https://github.com/a904guy">Andy Hawkins</a> for creating it.</p>
+
+<h1>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<h2>
+<a name="composer" class="anchor" href="#composer"><span class="octicon octicon-link"></span></a>Composer</h2>
+
+<p>For install from composer just add the following line to your project's composer.json file</p>
+
+<div class="highlight highlight-json"><pre>    <span class="s2">"require"</span> <span class="err">:</span> <span class="p">{</span>
+        <span class="nt">"link/link"</span> <span class="p">:</span> <span class="s2">"dev-master"</span>
+    <span class="p">}</span>
+</pre></div>
+
+<p>Then run <code>php composer.phar install</code></p>
+
+<h2>
+<a name="manually" class="anchor" href="#manually"><span class="octicon octicon-link"></span></a>Manually</h2>
+
+<p>Run <code>git clone https://github.com/apsdehal/Link.git</code> in your project's home directory and include it using</p>
+
+<div class="highlight highlight-php"><pre>    <span class="k">require</span><span class="p">(</span><span class="s2">"Link/src/Link.php"</span><span class="p">);</span>
+</pre></div>
+
+<h1>
+<a name="basics" class="anchor" href="#basics"><span class="octicon octicon-link"></span></a>Basics</h1>
+
+<h2>
+<a name="simple-routing" class="anchor" href="#simple-routing"><span class="octicon octicon-link"></span></a>Simple Routing</h2>
+
+<p>Routing is too simple with Link, following example supports it:</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">function</span> <span class="nf">routeMe</span><span class="p">(){</span>
+    <span class="k">echo</span> <span class="s1">'I am routed'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/'</span> <span class="o">=&gt;</span> <span class="s1">'routeMe'</span>
+<span class="p">));</span>
+</pre></div>
+
+<h2>
+<a name="named-routing" class="anchor" href="#named-routing"><span class="octicon octicon-link"></span></a>Named Routing</h2>
+
+<p>In Link routes can be named and then further used generatings links in a simple and elegant way.</p>
+
+<div class="highlight highlight-php"><pre>
+<span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">function</span> <span class="nf">nameMe</span><span class="p">(){</span>
+    <span class="k">echo</span> <span class="s1">'I am named'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/named'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'nameMe'</span><span class="p">,</span> <span class="s1">'Its my name'</span><span class="p">]</span>
+<span class="p">));</span>
+</pre></div>
+
+<p>Names to routes must be given as second argument in array while the first being the route handler.</p>
+
+<h3>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>These named routes can be used in creating in hassle free links.</p>
+
+<div class="highlight highlight-html"><pre>    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"&lt;?php echo Link::route('Its my name') ?&gt;"</span><span class="nt">&gt;</span>Go to named route<span class="nt">&lt;/a&gt;</span>
+</pre></div>
+
+<h2>
+<a name="routing-with-classes" class="anchor" href="#routing-with-classes"><span class="octicon octicon-link"></span></a>Routing with classes</h2>
+
+<p>Link can handle classes as Route handler easily, but remember non-static class will be handled RESTfully.</p>
+
+<div class="highlight highlight-php"><pre>
+<span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nv">$routes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/'</span> <span class="o">=&gt;</span> <span class="s1">'IndexController::getMeHome'</span><span class="p">,</span> <span class="c1">//Static function</span>
+    <span class="s1">'/home'</span> <span class="o">=&gt;</span> <span class="s1">'HomeController'</span><span class="p">,</span> <span class="c1">//RESTful class</span>
+    <span class="s1">'/office'</span> <span class="o">=&gt;</span> <span class="s1">'OfficeController'</span>
+<span class="p">);</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span><span class="nv">$routes</span><span class="p">)</span>
+</pre></div>
+
+<h2>
+<a name="restful-routing" class="anchor" href="#restful-routing"><span class="octicon octicon-link"></span></a>RESTful routing</h2>
+
+<p>RESTful routing is a breeze for Link.</p>
+
+<div class="highlight highlight-php"><pre>
+<span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">class</span> <span class="nc">HomeController</span>
+<span class="p">{</span>
+
+    <span class="k">function</span> <span class="nf">get</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s1">'You have got to home :)'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">post</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s1">'You have posted to home'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">put</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s1">'You have put to home'</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">function</span> <span class="nf">delete</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s1">'You have deleted the home :('</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span> <span class="k">array</span> <span class="p">(</span>
+    <span class="s1">'/'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'HomeController'</span><span class="p">,</span> <span class="s1">'HomeRoute'</span><span class="p">]</span>
+<span class="p">));</span>
+</pre></div>
+
+<h2>
+<a name="wildcards" class="anchor" href="#wildcards"><span class="octicon octicon-link"></span></a>WildCards</h2>
+
+<p>Link supports numbers, string and alphanumeric wildcards which can be used as <code>{i} {s} {a}</code> respectively and of course it can render regex also. Example will clear away your doubts</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$routes</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/'</span> <span class="o">=&gt;</span> <span class="s1">'IndexController'</span><span class="p">,</span>
+    <span class="s1">'/{i}'</span> <span class="o">=&gt;</span> <span class="s1">'IndexController'</span><span class="p">,</span>
+    <span class="c1">//Parameter in place of {i} will be passed to IndexController</span>
+    <span class="s1">'/posts/{a}/{i}/{s}'</span> <span class="o">=&gt;</span> <span class="s1">'PostsController'</span>
+<span class="p">);</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span><span class="nv">$routes</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="supplimentary-handlers" class="anchor" href="#supplimentary-handlers"><span class="octicon octicon-link"></span></a>Supplimentary Handlers</h2>
+
+<h3>
+<a name="universal-extra-handlers" class="anchor" href="#universal-extra-handlers"><span class="octicon octicon-link"></span></a>Universal Extra Handlers</h3>
+
+<p>Through Link, universal before and after handlers can be added, such that these are executed always before any route is routed. This can be done as follows:</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">function</span> <span class="nf">universalBeforeHandler</span><span class="p">(</span> <span class="nv">$id</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s1">'Hello I occured before with '</span> <span class="o">.</span> <span class="nv">$id</span> <span class="o">.</span> <span class="s1">'\n'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">universalAfterHandler</span><span class="p">(</span> <span class="nv">$id</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span> <span class="nv">$id</span> <span class="p">)</span>
+        <span class="k">echo</span> <span class="s1">'Hello I occured after with '</span> <span class="o">.</span> <span class="nv">$id</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">echo</span> <span class="s1">'I simply occured after'</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">main</span><span class="p">(){</span>
+    <span class="k">echo</span> <span class="s1">'I simply occured\n'</span>
+<span class="p">}</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">before</span><span class="p">(</span> <span class="s1">'universalBeforeHandler'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'12'</span><span class="p">]</span> <span class="p">);</span> <span class="c1">//If you want to pass parameters to them, pass them as arrays</span>
+<span class="nx">Link</span><span class="o">::</span><span class="na">before</span><span class="p">(</span> <span class="s1">'universalBeforeHandler'</span><span class="p">);</span> <span class="c1">//else don't even pass them</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/'</span> <span class="o">=&gt;</span> <span class="s1">'main'</span>
+    <span class="p">))</span>
+</pre></div>
+
+<p>Now go to '/' in your browser to find:</p>
+
+<p>Hello I occured before with 12</p>
+
+<p>I simply occured</p>
+
+<p>I simply occured after.</p>
+
+<h3>
+<a name="single-route" class="anchor" href="#single-route"><span class="octicon octicon-link"></span></a>Single Route</h3>
+
+<p>You can add a before (middle) handler to a specific route, just pass the before handler to routes array as third parameters. The wildcards extracted from route will be passed to to before handler and if it return some array, this array will be passed further to main handler but if not the original extracted wildcards would be passed away. Make sure you return an array from before handler.</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span> 
+<span class="k">function</span> <span class="nf">beforeHandler</span><span class="p">(</span> <span class="nv">$name</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s1">' Link'</span> <span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">function</span> <span class="nf">mainHandler</span><span class="p">(</span> <span class="nv">$name</span> <span class="p">){</span>
+    <span class="k">echo</span> <span class="nv">$name</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/{s}'</span> <span class="o">=&gt;</span> <span class="s1">'mainHandler'</span><span class="p">,</span> <span class="s1">'Main'</span><span class="p">,</span> <span class="s1">'beforHandler'</span>
+    <span class="p">));</span>
+</pre></div>
+
+<p>Go to '/aps' in browser, you will get <em>aps Link</em>.</p>
+
+<h2>
+<a name="passing-parameters-to-named-routes" class="anchor" href="#passing-parameters-to-named-routes"><span class="octicon octicon-link"></span></a>Passing Parameters to Named Routes</h2>
+
+<p>You can pass parameters to named routes if the have wildcards in the route path, this will thus generate dynamic links through a single named route.</p>
+
+<div class="highlight highlight-php"><pre>
+<span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">function</span> <span class="nf">nameMe</span><span class="p">(</span> <span class="nv">$i</span><span class="p">,</span> <span class="nv">$s</span> <span class="p">){</span>
+    <span class="k">echo</span> <span class="s1">'I am named and I have been passed '</span> <span class="o">.</span> <span class="nv">$i</span> <span class="o">.</span> <span class="nv">$s</span> <span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/named/{i}/{s}'</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">'nameMe'</span><span class="p">,</span> <span class="s1">'Its my name'</span><span class="p">]</span>
+<span class="p">));</span>
+</pre></div>
+
+<p>Now generate a link through Link</p>
+
+<div class="highlight highlight-php"><pre>
+<span class="k">echo</span> <span class="nx">Link</span><span class="o">::</span><span class="na">route</span><span class="p">(</span> <span class="s1">'Its my name'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Me'</span><span class="p">)</span> <span class="p">);</span>
+</pre></div>
+
+<p>This in turn will generate <code>YOUR_DOMAIN/named/1/Me</code>.</p>
+
+<h2>
+<a name="404-errors" class="anchor" href="#404-errors"><span class="octicon octicon-link"></span></a>404 Errors</h2>
+
+<p>You should probably add a 404 handler to your routes array, rest Link will take care of handling routes that are not found. In case, Link doesn't find a 404 route defined, it will just send a 404 header.</p>
+
+<h1>
+<a name="server-configuration" class="anchor" href="#server-configuration"><span class="octicon octicon-link"></span></a>Server Configuration</h1>
+
+<h2>
+<a name="apache" class="anchor" href="#apache"><span class="octicon octicon-link"></span></a>Apache</h2>
+
+<p>You should add the following code snippet in your Apache HTTP server VHost configuration or <strong>.htaccess</strong> file.</p>
+
+<div class="highlight highlight-apacheconf"><pre><span class="nt">&lt;IfModule</span> <span class="s">mod_rewrite.c</span><span class="nt">&gt;</span>
+    <span class="nb">RewriteEngine</span> <span class="k">on</span>
+    <span class="nb">RewriteCond</span> %{REQUEST_FILENAME} !-f
+    <span class="nb">RewriteCond</span> %{REQUEST_FILENAME} !-d
+    <span class="nb">RewriteCond</span> $1 !^(index\.php)
+    <span class="nb">RewriteRule</span> ^(.*)$ index.php/$1 [L]
+<span class="nt">&lt;/IfModule&gt;</span>
+</pre></div>
+
+<p>Alternatively, in a version of Apache greater than 2.2.15, then you can use this:</p>
+
+<div class="highlight highlight-apacheconf"><pre><span class="nb">FallbackResource</span> <span class="sx">/index.php</span>
+</pre></div>
+
+<h1>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h1>
+
+<p>If you are planning to use non-Restful method and non-static classes, then use them as follows:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">class</span> <span class="nc">HelloHandler</span> 
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">home</span><span class="p">(){</span>
+        <span class="k">echo</span> <span class="s1">'Hello home'</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nv">$helloObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HelloHandler</span><span class="p">();</span>
+
+<span class="nx">Link</span><span class="o">::</span><span class="na">all</span><span class="p">(</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'/'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="nv">$helloObejct</span><span class="p">,</span> <span class="s1">'home'</span> <span class="p">)</span>
+    <span class="p">))</span>
+</pre></div>
+
+<p>So you need to pass such functions as <code>array( $object, 'functionName' )</code></p>
+
+<h1>
+<a name="contributions" class="anchor" href="#contributions"><span class="octicon octicon-link"></span></a>Contributions</h1>
+
+<p>Thanks to all people below for contributing to Link.</p>
+
+<ul>
+<li><a href="https://github.com/jedmiry" class="user-mention">@jedmiry</a></li>
+<li>@pborelli</li>
+</ul><h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
+
+<p>Link is available under MIT license, so feel free to contribute and modify it as you like. Free software, Yeah!</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/apsdehal">apsdehal</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-51836617-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
