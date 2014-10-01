@@ -5,13 +5,13 @@
 </head>
 <body>
 <?php 
-	foreach( $res in $result ) {
+	foreach( $result as $res ) {
 ?>
 	<div>
-		<a href="/posts/<?=$res['id']?>"><?php$row['title']?></a>
+		<a href="/posts/<?= $res['id'] ?>"><?php $row['title'] ?></a>
 	</div>
 <?php
 	}
-??>
+?>
 </body>
 </html>
