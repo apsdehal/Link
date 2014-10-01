@@ -6,6 +6,7 @@ class HomeController
 	{
 		$postModel = new Post(); 
 		$posts = $postModel->getAllPosts();
-		View::render("home.php", $posts);
+		$view = new View("home.php");
+		$view->with($posts)->render();
 	}
 }

@@ -9,13 +9,18 @@ class PostController
 		}
 		$postModel = new Post();
 		$results = $postModel->getPostById($id);
-		View::render("post.php", $results);
+		$view = new View("post.php");
+		$view->with($results)->render();
 	}
 
 	function post() 
 	{
 		$postModel = new Post();
 		$result = $postModel->createPost();
-		return $result;
+		if ( $result ) {
+			header("Location: /" . $result);
+		} else {
+			header("Location: /");
+		}
 	}
 }

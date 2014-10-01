@@ -4,6 +4,7 @@ class CreateController
 {
 	function get() 
 	{
-		View::render("create.php");
+		$view = new View("create.php");
+		$view->render();
 	}
 }
