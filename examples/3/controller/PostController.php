@@ -18,7 +18,7 @@ class PostController
 		$postModel = new Post();
 		$result = $postModel->createPost();
 		if ( $result ) {
-			header("Location: /" . $result);
+			header("Location: /posts/" . $result);
 		} else {
 			header("Location: /");
 		}
