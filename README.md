@@ -197,7 +197,7 @@ function mainHandler( $name ){
 }
 
 Link::all(array(
-    '/{s}' => 'mainHandler', 'Main', 'beforHandler'
+    '/{s}' => ['mainHandler', 'Main', 'beforHandler']
     ));
 ``` 
 
