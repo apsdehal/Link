@@ -1,7 +1,7 @@
-#Link
+# Link
 A __minimal__ router for your php webapps and APIs that effortlessly links all your project. Its fast and to the point.
 
-#Features
+# Features
 - RESTful routing
 - Wildcards for your limitless creativity
 - Named routes to help you create links easily
@@ -9,12 +9,12 @@ A __minimal__ router for your php webapps and APIs that effortlessly links all y
 - Before and after routes function support
 - Tested with PHP >5.3
 
-##HHVM Version
+## HHVM Version
 
 HHVM version of Link can be found at https://github.com/bmbsqd/Link-Hack . Thanks to [Andy Hawkins](https://github.com/a904guy) for creating it.
 
 
-#Installation
+# Installation
 
 ## Composer
 
@@ -35,9 +35,9 @@ Run `git clone https://github.com/apsdehal/Link.git` in your project's home dire
 	require("Link/src/Link.php");
 ```
 
-#Basics
+# Basics
 
-##Simple Routing
+## Simple Routing
 
 Routing is too simple with Link, following example supports it:
 
@@ -53,7 +53,7 @@ Link::all( array(
 ));
 ```
 
-##Named Routing
+## Named Routing
 
 In Link routes can be named and then further used generatings links in a simple and elegant way.
 
@@ -72,7 +72,7 @@ Link::all( array(
 
 Names to routes must be given as second argument in array while the first being the route handler.
 
-###Usage
+### Usage
 
 These named routes can be used in creating in hassle free links.
 
@@ -80,7 +80,7 @@ These named routes can be used in creating in hassle free links.
 	<a href="<?php echo Link::route('Its my name') ?>">Go to named route</a>
 ```
 
-##Routing with classes
+## Routing with classes
 
 Link can handle classes as Route handler easily, but remember non-static class will be handled RESTfully.
 
@@ -97,7 +97,7 @@ $routes = array(
 Link::all($routes)
 ```
 
-##RESTful routing
+## RESTful routing
 
 RESTful routing is a breeze for Link.
 
@@ -129,7 +129,7 @@ Link::all( array (
 	'/' => ['HomeController', 'HomeRoute']
 ));
 ```
-##WildCards
+## WildCards
 
 Link supports numbers, string and alphanumeric wildcards which can be used as `{i} {s} {a}` respectively and of course it can render regex also. Example will clear away your doubts
 
@@ -143,9 +143,9 @@ $routes = array(
 
 Link::all($routes);
 ```
-##Supplimentary Handlers
+## Supplimentary Handlers
 
-###Universal Extra Handlers
+### Universal Extra Handlers
 
 Through Link, universal before and after handlers can be added, such that these are executed always before any route is routed. This can be done as follows:
 
@@ -203,7 +203,7 @@ Link::all(array(
 
 Go to '/aps' in browser, you will get *aps Link*.
 
-##Passing Parameters to Named Routes
+## Passing Parameters to Named Routes
 
 You can pass parameters to named routes if the have wildcards in the route path, this will thus generate dynamic links through a single named route.
 
@@ -254,7 +254,7 @@ Alternatively, in a version of Apache greater than 2.2.15, then you can use this
 FallbackResource /index.php
 ```
 
-#Notes
+# Notes
 
 If you are planning to use non-Restful method and non-static classes, then use them as follows:
 
@@ -275,13 +275,13 @@ Link::all( array(
 
 So you need to pass such functions as `array( $object, 'functionName' )`
 
-#Contributions
+# Contributions
 
 Thanks to all people below for contributing to Link.
 
 - @jedmiry
 - @pborelli
 
-#License
+# License
 
 Link is available under MIT license, so feel free to contribute and modify it as you like. Free software, Yeah!
